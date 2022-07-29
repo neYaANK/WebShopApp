@@ -1,0 +1,21 @@
+﻿@model Phone
+<div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+              <img class="card-img-top" alt="~@Model.PhoneModel" style="height: 225px; width: 100%; display: block;" src="@Model.PhoneImage" data-holder-rendered="true">
+              <div class="card-body">
+                <p class="card-text">@Model.PhoneDescription</p>
+                <p class="card-text">@Model.Category.Name</p>
+                <p class="card-text">@Model.Brand.Name</p>
+                <p class="card-text">@Model.Country.Name</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                      
+                    <a class="btn btn-sm btn-outline-secondary" asp-route-Id="@Model.Id" asp-action="SinglePhone" asp-controller="Phones">Show</a>
+                    <a class="btn btn-sm btn-outline-secondary" asp-route-Id="@Model.Id" asp-action="EditPhone" asp-controller="Phones">Edit</a>
+                    <a class="btn btn-sm btn-outline-secondary" asp-route-Id="@Model.Id" asp-action="DeletePhone" asp-controller="Phones">Delete</a>
+                  </div>
+                  <small class="text-muted">@Model.CountPhones phones</small>
+                </div>
+              </div>
+            </div>
+          </div>

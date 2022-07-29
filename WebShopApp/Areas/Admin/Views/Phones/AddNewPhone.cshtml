@@ -1,0 +1,67 @@
+﻿@model WebShopApp.Models.Phone
+@{
+}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
+<a class="btn btn-sm btn-outline-secondary" asp-area="Admin" asp-action="Index" asp-controller="Phones">Go Back</a>
+
+<div class="container">
+    <div class="row">
+        <h2>Add new phone</h2>
+        <form method="post" asp-action="AddNewPhone" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="phoneModel">Phone model name</label>
+                <input asp-for="PhoneModel" type="text" class="form-control" id="phoneModel">
+                <span asp-validation-for="PhoneModel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="phoneDescription">Phone description</label>
+                <textarea asp-for="PhoneDescription" type="text" class="form-control" id="phoneDescription"></textarea>
+                <span asp-validation-for="PhoneDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="File">Phone image</label>
+                <input type="file" asp-for="PhoneImageFile" class="form-control" id="File">
+            </div>
+            <div class="form-group">
+                <label for="phonePrice">Phone price</label>
+                <input asp-for="Price" type="number" placeholder="0" min="0" max="9999" class="form-control" id="phonePrice">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="phoneCount">Phones count</label>
+                <input asp-for="CountPhones" type="number" placeholder="0" min="0" max="99" class="form-control" id="phoneCount">
+            </div>
+            <div class="form-group">
+                <label for="categoryId">Category</label>
+                <select asp-for="CategoryId" asp-items="@ViewBag.Categories" placeholder="0" min="0" max="99" class="form-control" id="categoryId">
+                </select>
+                <label for="brandId">Brand</label>
+                <select asp-for="BrandId" asp-items="@ViewBag.Brands" placeholder="0" min="0" max="99" class="form-control" id="brandId">
+                </select>
+                <label for="countryId">Country</label>
+                        <select asp-for="CountryId" asp-items="@ViewBag.Countries" placeholder="0" min="0" max="99" class="form-control" id="countryId">
+                </select>
+                @*<input asp-for="Country.Name" list="contries" class="form-control">
+                    <datalist id="countries">
+                            @foreach (Country item in ViewBag.Countries)
+                            {
+                                <option label="@item.Name" value="@item.Id"></option>
+                            }
+                    </datalist>*@
+                   @* @Html.DropDownListFor(model=>model.Country,ViewBag.Countries as SelectList, new {@class="form-control"})*@
+                    
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

@@ -1,0 +1,27 @@
+﻿@model WebShopApp.Models.Phone
+
+<a class="btn btn-sm btn-outline-secondary" asp-action="Index" asp-area="Admin" asp-controller="Phones">Go Back</a>
+<div class="d-flex">
+    @if (!ViewBag.Success)
+    {
+        <div class="alert alert-success">
+            <strong>Error!</strong>
+        </div>
+    }
+    else
+    {
+        <div class="w-50 justify-content-center align-content-center d-flex flex-column">
+            <div class="w-50">
+                <img src="@Model.PhoneImage" class="w-100">
+            </div>
+            <p>Model: @Model.PhoneModel</p>
+            <p>Description: @Model.PhoneDescription</p>
+            <p>Price: @Model.Price</p>
+            <p>Number of phones: @Model.CountPhones</p>
+            <p>Category: @Model.Category.Name</p>
+            <p>Brand: @Model.Brand.Name</p>
+            <p>Country: @Model.Country.Name</p>
+            
+        </div>
+    }
+</div>
