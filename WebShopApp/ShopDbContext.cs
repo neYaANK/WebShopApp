@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace WebShopApp
 {
     public class ShopDbContext : IdentityDbContext<User>
     {
-        
+
         public DbSet<Phone> Phones { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
@@ -23,16 +24,7 @@ namespace WebShopApp
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Entity<OrderPhone>()
-            //    .HasKey(op => new { op.OrderId, op.PhoneId });
-            //modelBuilder.Entity<OrderPhone>()
-            //    .HasOne(op => op.Phone)
-            //    .WithMany(op => op.OrdersPhones)
-            //    .HasForeignKey(k=>k.PhoneId);
-            //modelBuilder.Entity<OrderPhone>()
-            //    .HasOne(op => op.Order)
-            //    .WithMany(op => op.OrdersPhones)
-            //    .HasForeignKey(k => k.OrderId);
+            SeedRoles(modelBuilder);
 
             modelBuilder.Entity<Country>().HasData(new Country[] {
                 new Country{Id=1,Name="Ukraine"},
@@ -48,10 +40,18 @@ namespace WebShopApp
                 new Country{Id=11,Name="Russia"},
                 new Country{Id=12,Name="Poland"},
                 new Country{Id=13,Name="Hungary"},
-                
 
-            }) ;
-        }        
+
+            });
+
+        }
+        private void SeedRoles(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole[]
+            {
+                    new IdentityRole(){Id=Guid.NewGuid().ToString(),Name="Admin",NormalizedName = "Admin"},
+                    new IdentityRole(){Id=Guid.NewGuid().ToString(),Name="User",NormalizedName = "User"}
+            });
+        }
     }
 }
- 
