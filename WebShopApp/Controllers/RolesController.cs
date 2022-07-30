@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using WebShopApp.ViewModel;
 
 namespace WebShopApp.Controllers
 {
+    [Authorize(Roles="Admin")]
     public class RolesController : Controller
     {
         private RoleManager<IdentityRole> _roleManager;

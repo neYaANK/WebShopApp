@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using WebShopApp.Models;
@@ -6,6 +7,7 @@ using WebShopApp.Utils;
 
 namespace WebShopApp.Controllers
 {
+    [Authorize(Roles="User")]
     public class CartController : Controller
     {
         private readonly ShopDbContext _context;
