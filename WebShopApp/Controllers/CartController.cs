@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebShopApp.Models;
 using WebShopApp.Utils;
+using WebShopApp.ViewModel;
 
 namespace WebShopApp.Controllers
 {
@@ -11,9 +15,11 @@ namespace WebShopApp.Controllers
     public class CartController : Controller
     {
         private readonly ShopDbContext _context;
-        public CartController(ShopDbContext context)
+        private readonly UserManager<User> _userManager;
+        public CartController(ShopDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -86,6 +92,29 @@ namespace WebShopApp.Controllers
         public IActionResult ContactData()
         {
             return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ContactData(ContactDataViewModel contactData)
+        {
+            var isAllValid = ModelState.IsValid || HttpContext.Session.Get<Cart>("cart") != null;
+
+            if (!isAllValid) return BadRequest();
+
+            var user = await _userManager.GetUserAsync(User);
+            Cart cart = HttpContext.Session.Get<Cart>("cart");
+            var order = new Order() { UserId = user.Id,Address = contactData.Address,City = contactData.City, RecieverName = contactData.Name, RecieverSurname = contactData.LastName};
+            order.OrderItems = new List<OrderItem>();
+
+            foreach(var item in cart.CartItems)
+            {
+                order.OrderItems.Add(new OrderItem() { PhoneId = item.Phone.Id, Quantity = item.Quantity });
+            }
+
+            HttpContext.Session.Remove("cart");
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
