@@ -7,7 +7,7 @@ using WebShopApp.Utils;
 
 namespace WebShopApp.Controllers
 {
-    [Authorize(Roles="User")]
+    [Authorize(Roles = "User")]
     public class CartController : Controller
     {
         private readonly ShopDbContext _context;
@@ -24,9 +24,9 @@ namespace WebShopApp.Controllers
                 ViewBag.Total = cart.CartItems.Sum(item => item.Phone.Price * item.Quantity);
             }
             return View();
-            
+
         }
-        public IActionResult Buy(int id, int quantity=1)
+        public IActionResult Buy(int id, int quantity = 1)
         {
             Phone phone = _context.Phones
                 .Where(c => c.Id == id)
@@ -37,14 +37,14 @@ namespace WebShopApp.Controllers
             if (HttpContext.Session.Get<Cart>("cart") == null)
             {
                 Cart cart = new Cart();
-                
+
                 cart.CartItems.Add(new CartItem() { Phone = phone, Quantity = quantity });
-                HttpContext.Session.Set("cart",cart);
+                HttpContext.Session.Set("cart", cart);
             }
             else
             {
                 Cart cart = HttpContext.Session.Get<Cart>("cart");
-                int index = DoesExist(id,cart);
+                int index = DoesExist(id, cart);
                 if (index != -1)
                 {
                     cart.CartItems[index].Quantity++;
@@ -55,11 +55,11 @@ namespace WebShopApp.Controllers
                 }
                 HttpContext.Session.Set("cart", cart);
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
 
         }
         [HttpGet]
-        public IActionResult Remove(int id) 
+        public IActionResult Remove(int id)
         {
             if (HttpContext.Session.Get<Cart>("cart") == null)
             {
@@ -74,7 +74,7 @@ namespace WebShopApp.Controllers
         }
         private int DoesExist(int id, Cart cart)
         {
-            for(int i = 0; i < cart.CartItems.Count; i++)
+            for (int i = 0; i < cart.CartItems.Count; i++)
             {
                 if (cart.CartItems[i].Phone.Id == id)
                 {
@@ -82,6 +82,10 @@ namespace WebShopApp.Controllers
                 }
             }
             return -1;
+        }
+        public IActionResult ContactData()
+        {
+            return View();
         }
     }
 }
