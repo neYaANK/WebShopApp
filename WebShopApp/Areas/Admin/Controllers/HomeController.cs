@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace WebShopApp.Areas.Admin.Controllers
 {
+    [Authorize(Roles="Admin")]
     [Area("Admin")]
     public class HomeController : Controller
     {

@@ -28,7 +28,7 @@
                                         </button>
 
                                         <input id="form1" min="0" name="quantity" value="@item.Quantity" type="number"
-                                       class="form-control form-control-sm" />
+                                       class="form-control form-control-sm" readonly/>
 
                                         <button class="btn btn-link px-2"
                                         onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
@@ -53,7 +53,7 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <button type="button" class="btn btn-warning btn-block btn-lg">Proceed to Pay</button>
+                            <a asp-action="ContactData" class="btn btn-warning btn-block btn-lg">Proceed to Pay</a>
                         </div>
                     </div>
                 }
