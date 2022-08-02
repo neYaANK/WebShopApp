@@ -21,17 +21,22 @@ namespace WebShopApp.Areas.Admin.Controllers
         }
         public IActionResult Details(int id)
         {
-            var order = _context.Orders.Single(c=>c.Id==id);
-            _context.Entry(order).Collection(c => c.OrderItems).Load();
+            var order = _context.Orders.Include(c=>c.OrderItems).ThenInclude(sn=>sn.Phone).Single(c=>c.Id==id);
             if (order == null) return NotFound();
             return View(order);
         }
         public IActionResult Delete(int id)
         {
-            var order = _context.Orders.SingleOrDefault(c => c.Id == id);
+            var order = _context.Orders
+                .Include(c=>c.OrderItems)
+                .SingleOrDefault(c => c.Id == id);
             if (order == null) return NotFound();
+
             _context.Orders.Remove(order);
+            
+            //BUG
             _context.SaveChanges();
+
             return RedirectToAction("Index");
         }
         
