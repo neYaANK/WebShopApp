@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ClassLibraryDB;
+using System.Collections.Generic;
 using WebShopApp.Models;
 
 namespace WebShopApp.ViewModel

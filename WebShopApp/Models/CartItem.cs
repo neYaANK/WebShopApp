@@ -1,4 +1,6 @@
-﻿namespace WebShopApp.Models
+﻿using ClassLibraryDB;
+
+namespace WebShopApp.Models
 {
     public class CartItem
     {

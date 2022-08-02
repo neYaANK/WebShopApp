@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
-namespace WebShopApp.Models
+namespace ClassLibraryDB
 {
-    public class User : IdentityUser
+    public class User: IdentityUser
     {
         public int Year { get; set; }
         public List<Order> Orders { get; set; }

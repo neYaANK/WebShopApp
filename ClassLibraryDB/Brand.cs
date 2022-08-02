@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebShopApp.Models
+namespace ClassLibraryDB
 {
     public class Brand
     {
@@ -10,6 +10,5 @@ namespace WebShopApp.Models
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
-
     }
 }
