@@ -1,4 +1,6 @@
-﻿namespace WebShopApp.ViewModel
+﻿using System;
+
+namespace WebShopApp.ViewModel
 {
     public class PageViewModel
     {
@@ -11,7 +13,7 @@
         public PageViewModel(int count, int pageNumber, int pageSize, string search, int brandId, int categoryId, int countryId)
         {
             PageNumber = pageNumber;
-            Total = count / pageSize;
+            Total = (int)Math.Ceiling(Convert.ToDouble(count)/Convert.ToDouble(pageSize));
             Query = search;
             BrandId = brandId;
             CategoryId = categoryId;

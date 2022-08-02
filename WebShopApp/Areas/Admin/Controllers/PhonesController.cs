@@ -42,7 +42,7 @@ namespace WebShopApp.Areas.Admin.Controllers
 
 
 
-            int psize = 1;
+            int psize = 5;
             model.Phones = items
                 .Skip((page - 1) * psize)
                 .Take(psize)
