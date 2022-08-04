@@ -1,4 +1,4 @@
-﻿namespace WebShopApp.Models
+﻿namespace ClassLibraryDB
 {
     public class OrderItem
     {

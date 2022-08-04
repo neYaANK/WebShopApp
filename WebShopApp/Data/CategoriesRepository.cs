@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ClassLibraryDB;
+using System.Collections.Generic;
 using System.Linq;
 using WebShopApp.Data.Interfaces;
 using WebShopApp.Models;

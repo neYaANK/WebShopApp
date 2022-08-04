@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace WebShopApp.Models
+namespace ClassLibraryDB
 {
     public class Phone
     {
@@ -22,12 +18,12 @@ namespace WebShopApp.Models
         [NotMapped]
         public IFormFile PhoneImageFile { get; set; }
         public int CountPhones { get; set; }
-        
+
         public int CategoryId { get; set; }
-        public Category Category { get; set; }        
+        public Category Category { get; set; }
         public int BrandId { get; set; }
-        public Brand Brand{ get; set; }        
-        public int CountryId{ get; set; }
-        public Country Country{ get; set; }
+        public Brand Brand { get; set; }
+        public int CountryId { get; set; }
+        public Country Country { get; set; }
     }
 }

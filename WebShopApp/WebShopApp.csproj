@@ -22,6 +22,10 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\ViewModels\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibraryDB\ClassLibraryDB.csproj" />
+  </ItemGroup>
 	
 	
 
